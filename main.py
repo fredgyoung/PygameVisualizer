@@ -21,6 +21,15 @@ pygame.display.set_caption("Example")
 
 cards = []
 
+def draw_grid():
+    # Horizontal
+    #pygame.draw.line(DISPLAYSURF, BLACK, (90, 390), (1090, 390), 1)
+    pygame.draw.line(DISPLAYSURF, BLACK, (90, 490), (1090, 490), 1)
+    # Vertical
+    for x in range(90, 1190, 100):
+        pygame.draw.line(DISPLAYSURF, BLACK, (x, 390), (x, 490), 1)
+
+
 def swap_cards(i, j):
     cards[i].swap_position(cards[j].x)
     cards[j].swap_position(cards[i].x)
@@ -97,6 +106,7 @@ while True:
                 #cards[8].swap_position(1)
 
     DISPLAYSURF.fill(WHITE)
+    draw_grid()
 
     for card in cards:
         card.update()
