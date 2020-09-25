@@ -1,5 +1,6 @@
 import pygame, sys
 from pygame.locals import *
+from random import randint
 
 # Initialize program
 pygame.init()
@@ -27,7 +28,7 @@ def draw_grid():
     pygame.draw.line(DISPLAYSURF, BLACK, (90, 490), (1090, 490), 1)
     # Vertical
     for x in range(90, 1190, 100):
-        pygame.draw.line(DISPLAYSURF, BLACK, (x, 390), (x, 490), 1)
+        pygame.draw.line(DISPLAYSURF, BLACK, (x, 410), (x, 490), 1)
 
 
 def swap_cards(i, j):
@@ -74,18 +75,11 @@ class Card():
         text = str(self.value)
         size = font.size(text)
         ren = font.render(text, 0, BLACK)
-        surface.blit(ren, (self.x + 30, self.y + 20))
+        surface.blit(ren, (self.x + 20, self.y + 20))
 
 for x in range(10):
-    card = Card(x*100+100, 400, x)
+    card = Card(x*100+100, 400, randint(10, 99))
     cards.append(card)
-
-'''
-cards[8].value = 1
-cards[1].value = 8
-cards[8].destinations.extend([(900, 200), (200, 200), (200, 400)])
-cards[1].destinations.extend([(200, 200), (900, 200), (900, 400)])
-'''
 
 # Beginning Game Loop
 while True:
@@ -102,8 +96,7 @@ while True:
                     card.shift_left()
             if event.key == pygame.K_UP:
                 swap_cards(1, 8)
-                #cards[1].swap_position(8)
-                #cards[8].swap_position(1)
+
 
     DISPLAYSURF.fill(WHITE)
     draw_grid()
@@ -112,7 +105,6 @@ while True:
         card.update()
         card.draw(DISPLAYSURF)
 
-    #move_card(8, 900, 200)
     pygame.display.update()
 
     FramePerSec.tick(FPS)
